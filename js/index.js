@@ -1,3 +1,4 @@
+// 监控区域
 (function () {
     // 监控区域 - 切换功能
     $(".content").eq(0).show()
@@ -21,8 +22,8 @@
 
 })();
 
+// 销售总量饼状图
 (function () {
-    // 销售总量饼状图
     const pie = document.querySelector('.pie');
     const echartsInstance = echarts.init(pie);
     const option = {
@@ -73,8 +74,8 @@
     })
 })();
 
+// 用户总量柱状图
 (function () {
-    // 用户总量柱状图
     const bar = document.querySelector('.bar');
     const echartsInstance = echarts.init(bar);
     // 中间省略的数据  准备三项
@@ -195,4 +196,271 @@
     window.addEventListener("resize", () => {
         echartsInstance.resize()
     })
+})();
+
+// 订单区域
+(function () {
+    var data = {
+        day365: { orders: '20,301,987', amount: '99834' },
+        day90: { orders: '301,987', amount: '9834' },
+        day30: { orders: '1,987', amount: '3834' },
+        day1: { orders: '987', amount: '834' }
+    }
+    let i = 0
+    // 点击事件
+    $('.order').on('click', '.filter span', function () {
+        let _index = $(this).index()
+        i = _index
+        // 点击之后加类名
+        $(this).addClass('active').siblings().removeClass('active')
+        // attr() 方法设置或返回被选元素的属性值。 获取span的data-key自定义属性
+        var key = $(this).attr('data-key')
+        key = data[key]
+        $('.order .item h4:eq(0)').text(key.orders)
+        $('.order .item h4:eq(1)').text(key.orders)
+    });
+    // 定时器
+    var aclick = $('.order span')
+    var timer;
+    function autoToggle() {
+        timer = setInterval(function () {
+            i++;
+            if (i > 3) {
+                i = 0
+            }
+            // 每三秒调用点击事件
+            aclick.eq(i).click()
+        }, 2000)
+    }
+    autoToggle()
+
+    $(".order").hover(function () {
+        clearInterval(timer)
+    }, function () {
+        autoToggle()
+    })
+})();
+
+// 销售额逻辑
+(function () {
+    const line = document.querySelector(".line")
+    const echartsInstance = echarts.init(line)
+    const option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        // 图例组件
+        legend: {
+            textStyle: {
+                color: '#4c9bfd' // 图例文字颜色
+
+            },
+            right: '10%'//距离右边10%
+        },
+        grid: {
+            left: '2%',
+            right: '4%',
+            bottom: '3%',
+            top: '20%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            // 去除轴内间距
+            boundaryGap: false,
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            axisTick: {
+                show: false//去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd'//文本颜色
+            },
+            axisLine: {
+                show: false//去除轴线  
+            }
+        },
+        yAxis: {
+            // 数据作为刻度文字                                  
+            type: 'value',
+            axisTick: {
+                show: false//去除刻度线
+            },
+            axisLabel: {
+                color: '#4c9bfd'//文本颜色
+            },
+            axisLine: {
+                show: false//去除轴线  
+            },
+            boundaryGap: false//去除轴内间距
+        },
+        series: [{
+            name: '预期销售额',
+            // 数据                                  
+            data: [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+            // 图表类型                                  
+            type: 'line',
+            // 圆滑连接                                  
+            smooth: true,
+            itemStyle: {
+                color: '#00f2f1'  // 线颜色
+            }
+        },
+        {
+            name: '实际销售额',
+            // 数据                                  
+            data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
+            // 图表类型                                  
+            type: 'line',
+            // 圆滑连接                                  
+            smooth: true,
+            itemStyle: {
+                color: '#ed3f35'  // 线颜色
+            }
+        }
+        ]
+    };
+    echartsInstance.setOption(option)
+    window.addEventListener("resize", () => {
+        echartsInstance.resize()
+    })
+
+    var data = {
+        // 年
+        year: [
+            [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+            [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+        ],
+        quarter: [
+            [23, 75, 12, 97, 21, 67, 98, 21, 43, 64, 76, 38],
+            [43, 31, 65, 23, 78, 21, 82, 64, 43, 60, 19, 34]
+        ],
+        month: [
+            [34, 87, 32, 76, 98, 12, 32, 87, 39, 36, 29, 36],
+            [56, 43, 98, 21, 56, 87, 43, 12, 43, 54, 12, 98]
+        ],
+        week: [
+            [43, 73, 62, 54, 91, 54, 84, 43, 86, 43, 54, 53],
+            [32, 54, 34, 87, 32, 45, 62, 68, 93, 54, 54, 24]
+        ]
+    }
+
+    function render(index) {
+        $(".caption span").eq(index).addClass("active").siblings("span").removeClass("active")
+    }
+
+    let i = 0
+    let timer = -1
+    function autoToggle() {
+        timer = setInterval(() => {
+            i++;
+            if (i > 3) {
+                i = 0
+            }
+            onClickHandler(i)
+        }, 2000)
+    }
+
+    function onClickHandler(index) {
+        const spanElem = $(".caption span").eq(index);
+        spanElem.click(); // 触发点击事件
+    }
+
+    autoToggle()
+
+    $(".sales").hover(() => {
+        clearInterval(timer)
+    }, () => {
+        autoToggle()
+    })
+
+    $(".caption span").click(function () {
+        const index = ($(this).index()) - 1
+        render(index)
+        const item = data[this.dataset.index]
+        console.log("item", item)
+
+        option.series[0].data = item[0]
+        option.series[1].data = item[1]
+        echartsInstance.setOption(option)
+    })
+
+})();
+
+// 季度销售进度图
+(function () {
+    const gauge = document.querySelector('.gauge');
+    const echartsInstance = echarts.init(gauge);
+    const option = {
+        series: [
+            {
+                type: 'pie',
+                radius: ['130%', '150%'], // 放大图形
+                center: ['50%', '80%'], // 往下移动  套住75%文字
+                label: {
+                    show: false
+                },
+                startAngle: 180,
+                hoverOffset: 0, // 鼠标经过不变大
+                data: [
+                    {
+                        value: 100,
+                        itemStyle: {
+                            // 颜色渐变#00c9e0->#005fc1
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [
+                                    { offset: 0, color: '#00c9e0' },
+                                    { offset: 1, color: '#005fc1' }
+                                ]
+                            }
+                        }
+                    },
+                    { value: 100, itemStyle: { color: '#12274d' } }, // 颜色#12274d
+
+                    { value: 200, itemStyle: { color: 'transparent' } } // 透明隐藏第三块区域
+                ]
+            }
+        ]
+    }
+    echartsInstance.setOption(option)
+    window.addEventListener("resize", () => {
+        echartsInstance.resize()
+    })
+})();
+
+// 全国热榜
+(function () {
+    var data = [
+        { name: '可爱多', num: '9,086' },
+        { name: '娃哈哈', num: '8,341' },
+        { name: '喜之郎', num: '7,407' },
+        { name: '八喜', num: '6,080' },
+        { name: '小洋人', num: '6,724' },
+        { name: '好多鱼', num: '2,170' },
+    ]
+    $('.inner').on('mouseenter', '.sup li', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        //获取随机的值  sort方法 是给数组排序 a-b是从小到大
+        //.5-随机0-1的数 可能为正可能为负 排序就会随机
+        var radomData = data.sort(function (a, b) { return 0.5 - Math.random() });
+        var html = '';
+        radomData.forEach(function (item) {
+            html += `<li><span>${item.name}</span><span>${item.num} <s class="icon-up"></s></span></li>`;
+        });
+        //渲染
+        $('.sub').html(html);
+    });
+    $('.province .sup li').eq(0).mouseenter();
+    var index = 0;
+    var timer = setInterval(() => {
+        index++;
+        if (index > 5) {
+            index = 0;
+        }
+        $('.sup li').eq(index).mouseenter();
+    }, 2000);
 })();

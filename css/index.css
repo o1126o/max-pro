@@ -187,6 +187,8 @@
 .map {
     height: 7.225rem;
     margin-bottom: .25rem;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -242,10 +244,109 @@
     height: 1.875rem;
 }
 
+.order .inner {
+    padding: .3rem .45rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.order .inner .filter {
+    display: flex;
+    margin-bottom: 0.2rem;
+}
+
+.order .filter span {
+    color: #1950c4;
+    padding: 0 .3rem;
+    font-size: .225rem;
+    border-right: 0.025rem solid #00f2f1;
+}
+
+.order .filter span:first-child {
+    padding-left: 0;
+}
+
+.order .filter span:last-child {
+    border-right: none;
+}
+
+.order .filter span.active {
+    color: #fff;
+    font-size: 0.25rem;
+}
+
+.order .data {
+    display: flex;
+}
+
+.order .data .item {
+    width: 50%;
+}
+
+.order .data .item h4 {
+    color: #fff;
+    font-size: .35rem;
+}
+
+.order .data .item span {
+    color: #4c9bfd;
+    font-size: .2rem;
+}
+
 /* 销售 */
 .sales {
     height: 3.1rem;
 }
+
+.sales .inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.sales .caption {
+    display: flex;
+    line-height: 1;
+}
+
+.sales h3 {
+    height: 0.225rem;
+    padding-right: 0.225rem;
+    border-right: 0.025rem solid #00f2f1;
+}
+
+.sales .caption span {
+    font-size: 0.2rem;
+    color: #0bace6;
+    padding: 0.05rem;
+    cursor: pointer;
+    margin: -0.0375rem 0 0 0.2625rem;
+    border-radius: 0.0375rem;
+}
+
+.sales .caption span.active {
+    background-color: #4c9bfd;
+    color: #fff;
+}
+
+.sales .chart {
+    flex: 1;
+    padding-top: 0.1rem;
+    position: relative;
+}
+
+.sales .chart .label {
+    color: #4996f5;
+    font-size: .175rem;
+    position: absolute;
+    left: .5rem;
+    top: .1rem;
+}
+
+.sales .chart .line {
+    width: 100%;
+    height: 100%;
+}
+
 
 /* 渠道与销售进度 */
 .wrap {
@@ -258,12 +359,198 @@
     margin-right: .25rem;
 }
 
+.channel .data {
+    margin-top: .21rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel .data .item h4 {
+    font-size: .4rem;
+    margin-bottom: .0375rem;
+}
+
+.channel .data .item span {
+    display: block;
+    font-size: .18rem;
+    color: #4c9bfd;
+}
+
 .quarter {
     flex: 1;
     height: 2.9rem;
 }
 
+.quarter .chart {
+    flex: 1;
+    padding-top: 0.22rem;
+}
+
+.quarter .box {
+    position: relative;
+}
+
+.quarter .label {
+    transform: translate(-50%, -30%);
+    color: #fff;
+    font-size: .45rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.quarter .label small {
+    font-size: 50%;
+}
+
+.quarter .gauge {
+    height: 1rem;
+}
+
+.quarter .data {
+    display: flex;
+}
+
+.quarter .data .item {
+    margin-right: .125rem;
+}
+
+.quarter .data .item h4 {
+    font-size: .34rem;
+    margin-bottom: .0375rem;
+}
+
+.quarter .data .item span {
+    display: block;
+    font-size: .18rem;
+    color: #4c9bfd;
+}
+
 /* 排行 */
 .top {
     height: 3.5rem;
+}
+
+.top .inner {
+    display: flex;
+}
+
+.top .all {
+    display: flex;
+    flex-direction: column;
+    width: 1.4125rem;
+    color: #4c9bfd;
+    font-size: 0.18rem;
+    vertical-align: middle;
+}
+
+.top .all ul {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: .125rem;
+    margin-left: .125rem;
+}
+
+.top .all [class^="icon-"] {
+    font-size: .5rem;
+    vertical-align: middle;
+    margin-right: 0.15rem;
+}
+
+.top .province {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    margin-left: .5rem;
+}
+
+.top .province i {
+    padding: 0 0.2rem;
+    margin-top: 0.05rem;
+    float: right;
+    font-style: normal;
+    font-size: 0.2rem;
+    color: #0bace6;
+}
+
+.top .province s {
+    display: inline-block;
+    transform: scale(0.8);
+    text-decoration: none;
+}
+
+.top .province .icon-up {
+    color: #dc3c33;
+}
+
+.top .province .icon-down {
+    color: #36be90;
+}
+
+.top .province ul {
+    flex: 1;
+    line-height: 1;
+    margin-bottom: 0.05rem;
+}
+
+.top .province .data {
+    display: flex;
+    margin-top: .225rem;
+    margin-left: .15rem;
+}
+
+.top .province ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top .province ul span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.top .province ul.sup {
+    font-size: 0.17rem;
+}
+
+.top .province ul.sup li {
+    color: #4995f4;
+    padding: 0.12rem;
+}
+
+.top .province ul.sup li.active {
+    color: #a3c6f2;
+    background-color: rgba(10, 67, 188, 0.2);
+}
+
+.top .province ul.sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 0.16rem;
+    background-color: rgba(10, 67, 188, 0.2);
+}
+
+.top .province ul.sub li {
+    color: #52ffff;
+    padding: 0.12rem 0.18rem;
+}
+
+.clock {
+    position: absolute;
+    top: -.4rem;
+    right: .42rem;
+    font-size: 0.22rem;
+    color: #0bace6;
+}
+
+.clock i {
+    margin-right: 1.2px;
+    font-size: 0.22rem;
 }
