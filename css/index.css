@@ -11,7 +11,6 @@
 .overview h4 {
     font-size: .35rem;
     color: #fff;
-    /* margin: 0 0 .1rem rem; */
 }
 
 .overview span {
@@ -191,32 +190,39 @@
     flex-direction: column;
 }
 
+.map .icon-cube {
+    color: #68d8fe;
+}
+
+.map .chart {
+    margin-top: .1875rem;
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.map .geo {
+    width: 100%;
+    height: 100%;
+}
 
 /* 用户 */
 .users {
     height: 4.25rem;
 }
 
-.users .inner {
-    display: flex;
-    flex-direction: column;
-}
-
 .users .chart {
-    display: flex;
-    justify-content: space-between;
-    height: 2.9rem;
     margin-top: .25rem;
+    display: flex;
 }
 
 .users .chart .bar {
-    width: 6.2rem;
-    height: 3.1rem;
+    width: 7.35rem;
+    height: 3rem;
 }
 
 .users .chart .data {
     width: 2.1rem;
-    min-width: 100px;
+    min-width: 120px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -244,21 +250,18 @@
     height: 1.875rem;
 }
 
-.order .inner {
-    padding: .3rem .45rem;
-    display: flex;
-    flex-direction: column;
-}
-
 .order .inner .filter {
     display: flex;
-    margin-bottom: 0.2rem;
 }
 
 .order .filter span {
+    display: block;
+    height: 0.225rem;
+    line-height: 1;
     color: #1950c4;
-    padding: 0 .3rem;
-    font-size: .225rem;
+    padding: 0 0.225rem;
+    font-size: 0.225rem;
+    cursor: pointer;
     border-right: 0.025rem solid #00f2f1;
 }
 
@@ -276,6 +279,7 @@
 }
 
 .order .data {
+    margin-top: 0.25rem;
     display: flex;
 }
 
@@ -286,11 +290,13 @@
 .order .data .item h4 {
     color: #fff;
     font-size: .35rem;
+    margin-bottom: 0.125rem;
 }
 
 .order .data .item span {
     color: #4c9bfd;
     font-size: .2rem;
+    display: block;
 }
 
 /* 销售 */
@@ -330,7 +336,7 @@
 
 .sales .chart {
     flex: 1;
-    padding-top: 0.1rem;
+    padding-top: 0.1875rem;
     position: relative;
 }
 
@@ -338,8 +344,8 @@
     color: #4996f5;
     font-size: .175rem;
     position: absolute;
-    left: .5rem;
-    top: .1rem;
+    left: .525rem;
+    top: .225rem;
 }
 
 .sales .chart .line {
@@ -360,6 +366,15 @@
 }
 
 .channel .data {
+    overflow: hidden;
+}
+
+.channel .data .radar {
+    height: 2.1rem;
+    width: 100%;
+}
+
+/* .channel .data {
     margin-top: .21rem;
     display: flex;
     justify-content: space-between;
@@ -375,7 +390,7 @@
     display: block;
     font-size: .18rem;
     color: #4c9bfd;
-}
+} */
 
 .quarter {
     flex: 1;

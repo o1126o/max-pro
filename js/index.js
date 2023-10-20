@@ -377,7 +377,6 @@
         const index = ($(this).index()) - 1
         render(index)
         const item = data[this.dataset.index]
-        console.log("item", item)
 
         option.series[0].data = item[0]
         option.series[1].data = item[1]
@@ -463,4 +462,80 @@
         }
         $('.sup li').eq(index).mouseenter();
     }, 2000);
+})();
+
+// 渠道分布逻辑
+(function () {
+    const radar = document.querySelector('.radar');
+    const echartsInstance = echarts.init(radar);
+    const dataBJ = [[90, 19, 56, 11, 34]];
+
+    const option = {
+        tooltip: {
+            show: true,
+            // 控制提示框组件的显示位置
+            position: ['40%', '10%'],
+        },
+        radar: {
+            center: ['50%', '50%'],
+            // 外半径占据容器大小
+            radius: '50%',
+            indicator: [
+                { name: '淘宝', max: 90 },
+                { name: '京东', max: 22 },
+                { name: '苏宁', max: 75 },
+                { name: '微商', max: 22 },
+                { name: '其他', max: 132 }
+            ],
+            shape: 'circle',
+            splitNumber: 4,
+            name: {
+                // 修饰雷达图文本颜色
+                textStyle: {
+                    color: '#4c9bfd',
+                    fontSize:10
+                }
+            },
+
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.5)'
+                }
+            },
+            splitArea: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.5)'
+                }
+            }
+        },
+        series: [
+            {
+                name: '上海',
+                type: 'radar',
+                lineStyle: {
+                    normal: {
+                        color: '#fff',
+                        // width: 1
+                    }
+                },
+                areaStyle: {
+                    color: 'rgba(238, 197, 102, 0.6)',
+                },
+                data: dataBJ,
+                symbol: 'circle',
+                // 拐点的大小  
+                symbolSize: 5,
+                itemStyle: {
+                    color: "#fff"
+                }
+            }
+        ]
+    }
+    echartsInstance.setOption(option)
+    window.addEventListener("resize", () => {
+        echartsInstance.resize()
+    })
 })();
